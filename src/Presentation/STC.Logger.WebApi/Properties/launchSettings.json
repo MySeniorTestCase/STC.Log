@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5003",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings:RabbitMQ:UserName": "root",
+        "ConnectionStrings:RabbitMQ:Password": "test1234",
+        "ConnectionStrings:RabbitMQ:HostName": "localhost",
+        "ConnectionStrings:RabbitMQ:Port": "5672",
+        "ConnectionStrings:Seq": "http://localhost:5341/",
+        "Source:MessageBroker:BatchSize": "200",
+        "Source:MessageBroker:ExchangeName": "LogExchange",
+        "Source:MessageBroker:QueueName": "log"
+      }
+    }
+  }
+}
