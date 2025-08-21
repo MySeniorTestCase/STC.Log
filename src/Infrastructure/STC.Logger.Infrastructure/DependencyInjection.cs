@@ -14,15 +14,10 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.Configure<MessageBrokerOptions>(config: configuration.GetSection("Source:MessageBroker") ??
-                                                         throw new InvalidOperationException(
-                                                             "Message Broker configuration is not set."));
+        services.Configure<MessageBrokerOptions>(config: configuration.GetRequiredSection("Source:MessageBroker"));
 
         {
-            services.Configure<RabbitMqConnectionOptions>(
-                config: configuration.GetSection("ConnectionStrings:RabbitMQ") ??
-                        throw new InvalidOperationException(
-                            "RabbitMQ connection string is not configured."));
+            services.Configure<RabbitMqConnectionOptions>(config: configuration.GetRequiredSection("ConnectionStrings:RabbitMQ"));
 
             services.AddHostedService<RabbitMqHostedService>();
         }
