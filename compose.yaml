@@ -1,0 +1,27 @@
+﻿services:
+  stc.logger:
+    image: stc.logger
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__RabbitMQ__HostName: "rabbitmq"
+      ConnectionStrings__RabbitMQ__UserName: "root"
+      ConnectionStrings__RabbitMQ__Password: "test1234"
+      ConnectionStrings__RabbitMQ__Port: "5672"
+      ConnectionStrings__Seq: "http://seq:5341/"
+      Source__MessageBroker__BatchSize: "200"
+      Source__MessageBroker__ExchangeName: "LogExchange"
+      Source__MessageBroker__QueueName: "log"
+    ports:
+      - 5003:8080
+    networks:
+      - stc-network
+    build:
+      context: .
+      dockerfile: src/Presentation/STC.Logger.WebApi/Dockerfile
+
+volumes:
+  logger-data:
+
+networks:
+  stc-network:
+    external: true 
